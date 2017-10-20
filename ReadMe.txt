@@ -64,8 +64,8 @@ The folder contains the following files:
  Email Address: xdy74@mail.missouri.edu; zarea@missouri.edu
  Latest Revision: April 2016
 
-This code uses Matlab Statistics and Machine Learning Toolbox, 
-Matlab Optimization Toolbox and Matlab Parallel Computing Toolbox. 
+This code uses MATLAB Statistics and Machine Learning Toolbox, 
+MATLAB Optimization Toolbox and MATLAB Parallel Computing Toolbox. 
 
 % This product is Copyright (c) 2016 University of Missouri
 % All rights reserved.
