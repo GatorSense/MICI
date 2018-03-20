@@ -11,7 +11,7 @@ This folder Includes papers and demo MATLAB code for:
 ***NOTE: If the MICI Classifier Fusion and/or Regression Algorithms are used in any publication or presentation, the following reference must be cited:
 
  [1] X. Du, A. Zare, J. Keller, D. Anderson, "Multiple Instance Choquet Integral for Classifier Fusion," 2016 IEEE Congress on Evolutionary Computation (CEC), Vancouver, BC, 2016, pp. 1054-1061.
- [2] X. Du and A. Zare, "Multiple Instance Choquet Integral Classifier Fusion and Regression for Remote Sensing Applications," Under Review. arXiv: https://arxiv.org/abs/1803.04048
+ [2] X. Du and A. Zare, "Multiple Instance Choquet Integral Classifier Fusion and Regression for Remote Sensing Applications," Under Review. Available: https://arxiv.org/abs/1803.04048
 
 ***************************************************************
 ***
