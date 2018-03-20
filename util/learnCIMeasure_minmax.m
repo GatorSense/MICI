@@ -1,21 +1,22 @@
-function [measure,initialMeasure, Analysis] = learnCIMeasure_noisyor(Bags, Labels, Parameters,trueInitMeasure)
-%% learnCIMeasure_noisyor()
+function [measure,initialMeasure, Analysis] = learnCIMeasure_minmax(Bags, Labels, Parameters,trueInitMeasure)
+%% learnCIMeasure_regression()
 % This function learns a fuzzy measure for Multiple Instance Choquet Integral (MICI)
-% This function only works with two-class classifier fusion problem, i.e., only "1" and "0" training labels.
-% This function uses a noisy-or fitness function and an evolutionary algorithm to optimize.
+% This function works with classifier fusion
+% This function uses a minmax objective function and an evolutionary algorithm to optimize.
 %
 % INPUT
-%    Bags        - 1xNumTrainBags cell    - inside each cell, NumPntsInBag x nSources double. Training bags data.
-%    Labels      - 1xNumTrainBags double  - only take values of "1" and "0". Bag-level training labels.
+%    InputBags        - 1xNumTrainBags cell    - inside each cell, NumPntsInBag x nSources double. Training bags data.
+%    InputLabels      - 1xNumTrainBags double  -  Bag-level training labels. 
+%                   If values of "1" and "0", transform into regression bags where each negative point forms a bag.
 %    Parameters                 - 1x1 struct - The parameters set by learnCIMeasureParams() function.
 %    trueInitMeasure (optional) - 1x(2^nSource-1) double - true initial Measureinput
 %
 % OUTPUT
 %    measure             - 1x(2^nSource-1) double - learned measure by MICI
 %    initialMeasure      - 1x(2^nSource-1) double - initial measure by MICI during random initialization
-%    Analysis (optional) - 1x1 struct - records all the intermediate results if Parameters.analysis == 1
+%    Analysis (optional) - 1x1 struct - records all the intermediate results if Parameters.analysis == 1 
 %                 Analysis.ParentChildMeasure - the pool of both parent and child measures across iterations
-%                 Analysis.ParentChildFitness - the pool of both parent and child fitness values across iterations
+%                 Analysis.ParentChildFitness - the pool of both parent and child fitness values across iterations  
 %                 Analysis.ParentChildTmpIdx2 - the indices of remaining 25% child measures selected
 %                 Analysis.Idxrp - Indices after randomly change between the order of the population
 %                 Analysis.measurePop - measure population
@@ -29,10 +30,7 @@ function [measure,initialMeasure, Analysis] = learnCIMeasure_noisyor(Bags, Label
 %                 Analysis.ElemUpdated - the element updated in the small-scale mutation in every iteration
 %                 Analysis.subsetIntervalnPop - the intervals for each measure element for each measures in the population
 %
-% REFERENCE :
-% X. Du, A. Zare, J. Keller, D. Anderson
-% “Multiple Instance Choquet Integral for Classifier Fusion,”
-% Submitted to 2016 IEEE World Congress on Computational Intelligence (WCCI).
+% 
 %
 % This product is Copyright (c) 2016 University of Missouri.
 % All rights reserved.
@@ -66,13 +64,7 @@ function [measure,initialMeasure, Analysis] = learnCIMeasure_noisyor(Bags, Label
 %
 
 
-
 %%
-% pre-compute quantities used in evalFitness
-atmean = normpdf(Parameters.mean,Parameters.mean,Parameters.sigma); %normpdf value at mean, i.e. the maximum value norm distribution can reach
-C1 = 1/(sqrt(2*pi) .* Parameters.sigma) / atmean;
-C1mean = Parameters.mean;
-C1sigma = Parameters.sigma;
 
 %set up variables
 Analysis = [];
@@ -132,6 +124,7 @@ end
 
 
 
+
 % compute lower bound index
 nElem_prev = 0;
 nElem_prev_prev=0;
@@ -184,13 +177,12 @@ upperindex = Parameters.upperindex;
 sampleVar = Parameters.sampleVar;
 
 %%
-%%
 %Initialize measures
 measurePop = zeros(Parameters.nPop,(2^nSources-1));%2^nSources-1 is the length of the measure, including the g_all=1
 if nargin == 4 %with initialMeasure input
     parfor i = 1:Parameters.nPop
         measurePop(i,:) = trueInitMeasure;
-        fitnessPop(i) = evalFitness_noisyor(Labels, measurePop(i,:), nPntsBags, oneV, bag_row_ids, diffM, C1, C1mean, C1sigma);
+        fitnessPop(i) = evalFitness_minmax(Labels, measurePop(i,:), nPntsBags, oneV, bag_row_ids, diffM);
     end
     
 elseif nargin == 3 %with random initialmeasure results
@@ -198,7 +190,7 @@ elseif nargin == 3 %with random initialmeasure results
     fitnessPop = -1e100*ones(1, Parameters.nPop); %very small number
     parfor i = 1:Parameters.nPop
         measurePop(i,:) = sampleMeasure(nSources,lowerindex,upperindex);
-        fitnessPop(i) =  evalFitness_noisyor(Labels, measurePop(i,:), nPntsBags, oneV, bag_row_ids, diffM, C1, C1mean, C1sigma);
+        fitnessPop(i) =  evalFitness_minmax(Labels, measurePop(i,:), nPntsBags, oneV, bag_row_ids, diffM);
     end
     
 else
@@ -208,9 +200,9 @@ end
 [mVal, indx] = max(fitnessPop);
 measure = measurePop(indx,:);  
 initialMeasure = measure;
-
+mVal_before = -10000;
 %%
-for iter = 1:Parameters.nIterations
+for iter = 1:Parameters.maxIterations
     childMeasure = measurePop;
     childFitness = zeros(1,Parameters.nPop); %pre-allocate array
     subsetIntervalnPop = zeros(Parameters.nPop,2^nSources-2);
@@ -224,14 +216,14 @@ for iter = 1:Parameters.nIterations
         if(z < eta) %Small-scale mutation: update only one element of the measure
             [iinterv] = sampleMultinomial_mat(subsetInterval, 1, 'descend' );%update the one interval according to multinomial
             childMeasure(i,:) =  sampleMeasure(nSources, lowerindex, upperindex, childMeasure(i,:),iinterv, sampleVar);
-            childFitness(i) = evalFitness_noisyor(Labels, childMeasure(i,:), nPntsBags, oneV, bag_row_ids, diffM, C1, C1mean, C1sigma);
+            childFitness(i) = evalFitness_minmax(Labels, childMeasure(i,:), nPntsBags, oneV, bag_row_ids, diffM);
             JumpType(i) = 1;
             ElemIdxUpdated(i) = iinterv;
         else %Large-scale mutation: update all measure elements sort by valid interval widths in descending order
                 [~, indx_subsetInterval] = sort(subsetInterval,'descend'); %sort the intervals through descending order
             for iinterv = 1:size(indx_subsetInterval,2) %for all elements
                 childMeasure(i,:) =  sampleMeasure(nSources, lowerindex, upperindex, childMeasure(i,:),iinterv, sampleVar);
-                childFitness(i) = evalFitness_noisyor(Labels, childMeasure(i,:), nPntsBags, oneV, bag_row_ids, diffM, C1, C1mean, C1sigma);
+                childFitness(i) = evalFitness_minmax(Labels, childMeasure(i,:), nPntsBags, oneV, bag_row_ids, diffM);
                 JumpType(i) = 2;
             end
         end
@@ -259,7 +251,7 @@ for iter = 1:Parameters.nIterations
     
     %%% Method 2: Sample by multinomial distribution based on fitness
     PDFdistr75 = ParentChildFitness_sortV(Parameters.nPop/2+1:end);
-    [outputIndexccc] = sampleMultinomial_mat(PDFdistr75, Parameters.nPop/2,'descend' );
+    [outputIndexccc] = sampleMultinomial_mat(PDFdistr75, Parameters.nPop/2 , 'descend' );
     
     ParentChildTmpIdx2  =   ParentChildFitness_sortIdx(Parameters.nPop/2+outputIndexccc);
     measurePopNext(Parameters.nPop/2+1 : Parameters.nPop,:) = ParentChildMeasure(ParentChildTmpIdx2 , : );
@@ -275,6 +267,7 @@ for iter = 1:Parameters.nIterations
     
     %update best answer - outputted to command window
     if(max(fitnessPop) > mVal)
+         mVal_before = mVal;
         [mVal, mIdx] = max(fitnessPop);
         measure = measurePop(mIdx,:);
         disp(mVal);
@@ -298,9 +291,14 @@ for iter = 1:Parameters.nIterations
         Analysis.subsetIntervalnPop(:,:,iter)=subsetIntervalnPop;
     end
     
+    
     if(mod(iter,10) == 0)
-        disp(['Iteration: ', num2str(iter), ' of ', num2str(Parameters.nIterations)]);
+        disp(['Iteration: ', num2str(iter)]);
     end
+            if abs(mVal - mVal_before) <= Parameters.fitnessThresh 
+                break;
+            end
 end
 
 end
+

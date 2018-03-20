@@ -14,7 +14,8 @@ function [Parameters] = learnCIMeasureParams()
                
 Parameters.nPop = 100; %Size of population
 Parameters.sigma = 0.1; %Sigma of Gaussians in fitness function
-Parameters.nIterations = 100; %Number of iterations
+Parameters.maxIterations = 5000; %max number of iteration
+Parameters.fitnessThresh = 0.0001;%stopping criteria: when fitness change is less than the threshold
 Parameters.eta = 0.8; %Percentage of time to make small-scale mutation
 Parameters.sampleVar = 0.1; %variance around sample mean
 Parameters.mean = 1; % mean of ci in fitness function. Is always set to 1 if the positive label is "1".
