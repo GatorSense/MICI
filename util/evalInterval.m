@@ -10,6 +10,9 @@ function [subsetInterval] = evalInterval(measure,nSources,lowerindex,upperindex)
 % OUTPUT
 %   subsetInterval - the valid interval widths for the measure elements,before sorting by value
 %
+% Written by: X. Du 03/2018
+%
+
 Nmeasure = 2^nSources-1 ; %total length of measure
 lb = zeros(1,Nmeasure-1);
 ub = zeros(1,Nmeasure-1);

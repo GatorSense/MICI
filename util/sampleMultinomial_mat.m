@@ -12,7 +12,8 @@ function [outputIndex] = sampleMultinomial_mat(PDFdistr, NumSamples, MethodStr )
 % OUTPUT
 % Indxccc - index of the samples
 %
-
+% Written by: X. Du 03/2018
+%
 
 % %% Method 1: correct! Vector form. Uses a for-loop. Slow.
 % [PDFdistr_sortV,PDFdistr_sortIdx] = sort(PDFdistr,'descend');

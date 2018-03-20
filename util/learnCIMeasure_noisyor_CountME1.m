@@ -3,8 +3,11 @@ function [measure,initialMeasure, Analysis] = learnCIMeasure_noisyor_CountME1(Ba
 % This function learns a fuzzy measure for Multiple Instance Choquet Integral (MICI)
 % This function only works with two-class classifier fusion problem, i.e., only "1" and "0" training labels.
 % This function uses a noisy-or fitness function and an evolutionary algorithm to optimize.
-% * Updates measure element in the order that counts in total how many instances are using this measure
-%%%element
+% This function uses "ME" optimization: 
+%%% Updates measure element in the order that counts in total 
+%%% how many instances are using this measure element. 
+%%% This is illustrated for noisy-or, but this can be coded up for
+%%% min-max and gen-mean models as well.
 %
 % INPUT
 %    Bags        - 1xNumTrainBags cell    - inside each cell, NumPntsInBag x nSources double. Training bags data.
@@ -31,43 +34,8 @@ function [measure,initialMeasure, Analysis] = learnCIMeasure_noisyor_CountME1(Ba
 %                 Analysis.ElemUpdated - the element updated in the small-scale mutation in every iteration
 %                 Analysis.subsetIntervalnPop - the intervals for each measure element for each measures in the population
 %
-% REFERENCE :
-% X. Du, A. Zare, J. Keller, D. Anderson
-% “Multiple Instance Choquet Integral for Classifier Fusion,”
-% Submitted to 2016 IEEE World Congress on Computational Intelligence (WCCI).
+% Written by: X. Du 03/2018
 %
-% This product is Copyright (c) 2016 University of Missouri.
-% All rights reserved.
-%
-% Redistribution and use in source and binary forms, with or without
-% modification, are permitted provided that the following conditions
-% are met:
-%
-%   1. Redistributions of source code must retain the above copyright
-%      notice, this list of conditions and the following disclaimer.
-%   2. Redistributions in binary form must reproduce the above copyright
-%      notice, this list of conditions and the following disclaimer in the
-%      documentation and/or other materials provided with the distribution.
-%   3. Neither the name of the University nor the names of its contributors
-%      may be used to endorse or promote products derived from this software
-%      without specific prior written permission.
-%
-% THIS SOFTWARE IS PROVIDED BY THE UNIVERSITY OF MISSOURI AND
-% CONTRIBUTORS ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES,
-% INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
-% MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-% DISCLAIMED.  IN NO EVENT SHALL THE UNIVERSITY OR CONTRIBUTORS
-% BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
-% EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-% LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES,
-% LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
-% HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
-% CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
-% OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
-% SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-%
-
-
 
 %%
 % pre-compute quantities used in evalFitness

@@ -14,6 +14,8 @@ function [measure] = sampleMeasure(nSources, lowerindex, upperindex,  prevSample
 % OUTPUT
 %   - measure - new measure after update
 %
+% Written by: X. Du 03/2018
+%
 
 if(nargin < 4)
     % sample a brand new measure

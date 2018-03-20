@@ -1,6 +1,7 @@
 
-function [fitness] = evalFitness_noisy(Labels, measure, nPntsBags, oneV, bag_row_ids, diffM,C1, mean, sigma)
+function [fitness] = evalFitness_minmax(Labels, measure, nPntsBags, oneV, bag_row_ids, diffM)
 % Evaluate the fitness a measure, using min( sum(max((ci-0)^2)) + sum(min(ci-1)^2) ) for classification.
+% min-max model
 %
 % INPUT
 %    Labels         - 1xNumTrainBags double  - Training labels for each bag
@@ -11,6 +12,8 @@ function [fitness] = evalFitness_noisy(Labels, measure, nPntsBags, oneV, bag_row
 %
 % OUTPUT
 %   fitness         - the fitness value using min(sum(min((ci-d)^2))) for regression.
+%
+% Written by: X. Du 03/2018
 %
 
 singletonLoc = (nPntsBags == 1);

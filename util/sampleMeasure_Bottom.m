@@ -11,7 +11,8 @@ function [measure] = sampleMeasure_Bottom(nSources,lowerindex)
 % OUTPUT
 %   - measure - new measure after update
 %
-
+% Written by: X. Du 03/2018
+%
 
 %sample new measure, prior is uniform/no prior
 measure = zeros(1,(2^nSources-1));

@@ -2,7 +2,8 @@ function [y] = ChoquetIntegral_g_MultiSources(hx,g,nSources)
 % Compute the Choquet integral output given a data point "hx" and measure "g"
 % Can be used for multiple sources (>=3)
 % This is correct! But only computes one data point at a time. If multiple
-% data points, need to do a for-loop.
+% data points, need to do a for-loop, OR use the more convenient
+% computeci.m.
 % 
 % A faster implementation can be seen in "computeci.c" (mex file) for
 % multiple data points.

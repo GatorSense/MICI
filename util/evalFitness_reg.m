@@ -13,6 +13,8 @@ function [fitness] = evalFitness_reg(Labels, measure, nPntsBags, oneV, bag_row_i
 % OUTPUT
 %   fitness         - the fitness value using min(sum(min((ci-d)^2))) for regression.
 %
+% Written by: X. Du 03/2018
+%
 
 singletonLoc = (nPntsBags == 1);
 fitness = 0;

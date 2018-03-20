@@ -87,7 +87,7 @@ Department of Electrical and Computer Engineering, University of Florida
 This code uses MATLAB Statistics and Machine Learning Toolbox, 
 MATLAB Optimization Toolbox and MATLAB Parallel Computing Toolbox. 
 
-% This product is Copyright (c) 2018 University of Missouri, University of Florida
+% This product is Copyright (c) 2018 X. Du and A. Zare
 % All rights reserved.
 %
 % Redistribution and use in source and binary forms, with or without

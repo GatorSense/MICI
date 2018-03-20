@@ -1,7 +1,7 @@
 
 function [fitness] = evalFitness_softmax(Labels, measure, nPntsBags, oneV, bag_row_ids, diffM,p)
 % Evaluate the fitness a measure, similar to evalFitness_minmax() for
-% classification but uses generalized mean (softmax)
+% classification but uses generalized mean (sometimes also named "softmax") model
 %
 % INPUT
 %    Labels         - 1xNumTrainBags double  - Training labels for each bag
@@ -13,7 +13,8 @@ function [fitness] = evalFitness_softmax(Labels, measure, nPntsBags, oneV, bag_r
 % OUTPUT
 %   fitness         - the fitness value using min(sum(min((ci-d)^2))) for regression.
 %
-
+% Written by: X. Du 03/2018
+%
 p1 = p(1);
 p2 = p(2);
 

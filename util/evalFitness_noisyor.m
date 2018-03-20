@@ -1,6 +1,5 @@
 function [fitness] = evalFitness_noisyor(Labels, measure, nPntsBags, oneV, bag_row_ids, diffM, C1, mean, sigma)
-% (Bags, Labels, measure, Parameters, bag_row_ids, diffM)
-% Evaluate the fitness a measure, using min(sum(min((ci-d)^2))) for regression.
+% Evaluate fitness for noisy-or model
 %
 % INPUT
 %    Labels         - 1xNumTrainBags double  - Training labels for each bag
@@ -15,6 +14,8 @@ function [fitness] = evalFitness_noisyor(Labels, measure, nPntsBags, oneV, bag_r
 %
 % OUTPUT
 %   fitness         - the fitness value using noisy-or objective function (for two-class labels)
+%
+% Written by: X. Du 03/2018
 %
 
 
