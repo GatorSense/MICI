@@ -94,8 +94,8 @@ A = [1      0     0      -1        0       0;   % g{x1} - g{x1,x2}
 b = [0 0 0 0 0 0 1 1 1]';
 
 % Use matlab built-in function for solving the quadratic problem.
-options = optimset('Algorithm', 'active-set');
- g = quadprog(D, G, A, b, [], [], zeros(2^n_sources-2,1),ones(2^n_sources-2,1), [], options); %add upper and lower bounds of [0,1] - X. Du 01/13/2016
+%options = optimset('Algorithm', 'active-set');
+ g = quadprog(D, G, A, b, [], [], zeros(2^n_sources-2,1),ones(2^n_sources-2,1), []); %add upper and lower bounds of [0,1] - X. Du 01/13/2016
 
 end
 

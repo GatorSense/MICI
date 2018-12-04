@@ -168,8 +168,8 @@ b = zeros(nSources*(2^(nSources-1)-1),1);
 b([end-nSources+1:end]) = 1; % the last tier constraints <=1
 
 % Use matlab built-in function for solving the quadratic problem.
- options = optimset('Algorithm', 'active-set');
-g = quadprog(D, Gamma, A, b, [], [], zeros(2^nSources-2,1),ones(2^nSources-2,1), [], options);
+%  options = optimset('Algorithm', 'active-set');
+g = quadprog(D, Gamma, A, b, [], [], zeros(2^nSources-2,1),ones(2^nSources-2,1), []);
 % options = optimset('Algorithm', 'interior-point-convex');
 % options = optimset('Algorithm', 'trust-region-reflective');
 % g = quadprog(D, Gamma, A, b, [], [], [], [], []);
