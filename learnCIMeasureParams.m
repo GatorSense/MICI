@@ -10,7 +10,7 @@ function [Parameters] = learnCIMeasureParams()
 %                    5. sampleVar: Variance around sample mean
 %                    6. mean: mean of ci in fitness function. Is always set to 1 if the positive label is "1".
 %                    7. analysis: if ="1", record all intermediate results
-%
+%                    8. p: the power coefficient for the generalized-mean function. Empirically, setting p(1) to a large postive number (e.g., 10) and p(2) to a large negative number (e.g., -10) works well.
                
 Parameters.nPop = 100; %Size of population
 Parameters.sigma = 0.1; %Sigma of Gaussians in fitness function
