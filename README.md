@@ -7,7 +7,7 @@ _Xiaoxiao Du and Alina Zare_
 
 [[`IEEEXplore (MICI Classifier Fusion and Regression paper)`](https://ieeexplore.ieee.org/document/8528500)]
 
-[[`arXiv`](https://arxiv.org/abs/1803.04048)] 
+[[`arXiv`](https://arxiv.org/abs/1803.04048)]
 
 [[`BibTeX`](#CitingMICI)]
 
@@ -34,7 +34,7 @@ The MICI Classifier Fusion and Regression Algorithm runs using the following fun
 2. MICI Classifier Fusion (min-max model) Algorithm
 
  ```[measure, initialMeasure,Analysis] = learnCIMeasure_minmax(TrainBags, TrainLabels, Parameters);```
- 
+
 3. MICI Classifier Fusion (generalized-mean model) Algorithm
 
 ```[measure, initialMeasure,Analysis] = learnCIMeasure_softmax(TrainBags, TrainLabels, Parameters);```
@@ -48,7 +48,7 @@ The MICI Classifier Fusion and Regression Algorithm runs using the following fun
 
 #The *TrainBags* input is a 1xNumTrainBags cell. Inside each cell, NumPntsInBag x nSources double -- Training bags data.
 
-#The *TrainLabels* input is a 1xNumTrainBags double vector that takes values of "1" and "0" for two-class classfication problems -- Training labels for each bag. 
+#The *TrainLabels* input is a 1xNumTrainBags double vector that takes values of "1" and "0" for two-class classfication problems -- Training labels for each bag.
 
 
 ## Parameters
@@ -64,7 +64,7 @@ The parameters is a MATLAB structure with the following fields:
 5. sampleVar: variance around sample mean
 6. mean: mean of CI in fitness function. This value is always set to 1 (or very close to 1) if the positive label is "1".
 7. analysis: if ="1", save all intermediate results
-8. p: the power coefficient for the generalized-mean function. Empirically, setting p(1) to a large postive number and p(2) to a large negative number works well. 
+8. p: the power coefficient for the generalized-mean function. Empirically, setting p(1) to a large postive number and p(2) to a large negative number works well.
 
 *Parameters can be modified by users in [Parameters] = learnCIMeasureParams() function.*
 
@@ -79,12 +79,12 @@ https://github.com/GatorSense/MICI
     ├── learnCIMeasureParams.m  //parameters function
     ├── papers  //related publications
     │   ├── MICI for Classifier Fusion.pdf
-    |   └── MICI Classifier Fusion and Regression.pdf
+    |   └── MICI Classifier Fusion and Regression for Remote Sensing Applications.pdf
     └── util  //utility functions
         ├── ChoquetIntegral_g_MultiSources.m  //compute CI for multiple sources
-        ├── computeci.c    //compute CI. *Need to run "mex computeci.c"
-        ├── ismember_findrow_mex.c  //find row index if vector A is part of a row in vector B.   *Need to run "mex ismember_findrow_mex.c*
-        ├── ismember_findrow_mex_my.m  // find row index if vector A is part of a row in vector B (uses above c code). 
+        ├── computeci.c    //compute CI. *Need to run "mex computeci.c"*
+        ├── ismember_findrow_mex.c  //find row index if vector A is part of a row in vector B.   *Need to run "mex ismember_findrow_mex.c"*
+        ├── ismember_findrow_mex_my.m  // find row index if vector A is part of a row in vector B (uses above c code).
         ├── share.h  //global variable header to be used in computeci.c
         ├── learnCIMeasure_noisyor.m  //MICI Two-Class Classifier Fusion with noisy-or objective function
         ├── learnCIMeasure_noisyor_CountME1.m  //MICI Two-Class Classifier Fusion with noisy-or objective function, using ME optimization
@@ -94,7 +94,7 @@ https://github.com/GatorSense/MICI
         ├── evalFitness_noisyor.m  //noisy-or fitness function
         ├── evalFitness_minmax.m  //min-max fitness function
         ├── evalFitness_softmax.m  //generalized-mean fitness function
-        ├── evalFitness_reg.m  //regression fitness function 
+        ├── evalFitness_reg.m  //regression fitness function
         ├── invcdf_TruncatedGaussian.m //compute inverse cdf for Truncated Gaussian
         ├── sampleMeasure.m //sample new measures
         ├── sampleMeasure_Above.m  //sampling a new measure from top-down.
@@ -148,6 +148,6 @@ month={July}
 Also check out our Multiple Instance Multi-Resolution Fusion (MIMRF) algorithm for multi-resolution fusion!
 
 
-[[`arXiv`](https://arxiv.org/abs/1805.00930)] 
+[[`arXiv`](https://arxiv.org/abs/1805.00930)]
 
-[[`GitHub Code Repository`](https://github.com/GatorSense/MIMRF)] 
+[[`GitHub Code Repository`](https://github.com/GatorSense/MIMRF)]
