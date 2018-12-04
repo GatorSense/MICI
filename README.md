@@ -68,6 +68,45 @@ The parameters is a MATLAB structure with the following fields:
 
 *Parameters can be modified by users in [Parameters] = learnCIMeasureParams() function.*
 
+## Inventory
+
+```
+https://github.com/GatorSense/MICI
+
+└── root dir
+    ├── demo_main.m   //Run this. Main demo file.
+    ├── demo_data_cl.mat //Demo classification data
+    ├── learnCIMeasureParams.m  //parameters function
+    ├── papers  //related publications
+    │   ├── MICI for Classifier Fusion.pdf
+    |   └── MICI Classifier Fusion and Regression.pdf
+    └── util  //utility functions
+        ├── ChoquetIntegral_g_MultiSources.m  //compute CI for multiple sources
+        ├── computeci.c    //compute CI. *Need to run "mex computeci.c"
+        ├── ismember_findrow_mex.c  //find row index if vector A is part of a row in vector B.   *Need to run "mex ismember_findrow_mex.c*
+        ├── ismember_findrow_mex_my.m  // find row index if vector A is part of a row in vector B (uses above c code). 
+        ├── share.h  //global variable header to be used in computeci.c
+        ├── learnCIMeasure_noisyor.m  //MICI Two-Class Classifier Fusion with noisy-or objective function
+        ├── learnCIMeasure_noisyor_CountME1.m  //MICI Two-Class Classifier Fusion with noisy-or objective function, using ME optimization
+        ├── learnCIMeasure_minmax.m  //MICI Two-Class Classifier Fusion with min-max objective function
+        ├── learnCIMeasure_softmax.m  //MICI Two-Class Classifier Fusion with generalized-mean objective function
+        ├── learnCIMeasure_regression.m  //MICI Regression
+        ├── evalFitness_noisyor.m  //noisy-or fitness function
+        ├── evalFitness_minmax.m  //min-max fitness function
+        ├── evalFitness_softmax.m  //generalized-mean fitness function
+        ├── evalFitness_reg.m  //regression fitness function 
+        ├── invcdf_TruncatedGaussian.m //compute inverse cdf for Truncated Gaussian
+        ├── sampleMeasure.m //sample new measures
+        ├── sampleMeasure_Above.m  //sampling a new measure from top-down.
+        ├── sampleMeasure_Bottom.m  //sampling a new measure from bottom-up.
+        ├── sampleMultinomial_mat.m  //sample from a multinomial distribution.
+        ├── quadLearnChoquetMeasure_3Source.m  //code for CI-QP method, hard-coded for 3 sources
+        ├── quadLearnChoquetMeasure_4Source.m  //code for CI-QP method, hard-coded for 4 sources
+        ├── quadLearnChoquetMeasure_5Source.m  //code for CI-QP method, hard-coded for 5 sources
+        └── quadLearnChoquetMeasure_MultiSource.m  //code for the CI-QP method (learn CI measures using quadratic programming) for multiple (>=3) sources
+
+
+```
 
 ## License
 
