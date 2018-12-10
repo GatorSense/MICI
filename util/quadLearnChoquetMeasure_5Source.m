@@ -6,7 +6,7 @@ function g = quadLearnChoquetMeasure_5Source(H, Y)
 %           following quadratic programming problem:
 %
 %
-%      argmin { 0.5*g'D+gamma'*g }
+%      argmin { 0.5*g'Dg+gamma'*g }
 %         g
 %
 %       s.t. 0 <= g <=1 and A*g <= b --> A*g - b <= 0  
