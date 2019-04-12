@@ -3,6 +3,8 @@
 
 _Xiaoxiao Du and Alina Zare_
 
+Note: If this code is used, cite it: Xiaoxiao Du, & Alina Zare. (2019, April 12). GatorSense/MICI: Initial Release (Version v1.0). Zenodo. http://doi.org/10.5281/zenodo.2638378  [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.2638378.svg)](https://doi.org/10.5281/zenodo.2638378)
+
 [[`IEEEXplore (MICI Classifier Fusion paper)`](https://ieeexplore.ieee.org/document/7743905)]
 
 [[`IEEEXplore (MICI Classifier Fusion and Regression paper)`](https://ieeexplore.ieee.org/document/8528500)]
