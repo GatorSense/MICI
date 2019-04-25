@@ -118,16 +118,25 @@ This product is Copyright (c) 2018 X. Du and A. Zare. All rights reserved.
 
 ## <a name="CitingMICI"></a>Citing MICI
 
-If you use the MICI clasifier fusion and regression algorithms, please cite the following references using the following BibTeX entries.
+If you use the MICI clasifier fusion and regression algorithms, please cite the following references using the following entries.
+
+**Plain Text:**
+
+X. Du and A. Zare, "Multiple Instance Choquet Integral Classifier Fusion and Regression for Remote Sensing Applications," in IEEE Transactions on Geoscience and Remote Sensing, vol. 57, no. 5, pp. 2741-2753, May 2019. doi: 10.1109/TGRS.2018.2876687
+
+X. Du, A. Zare, J. M. Keller and D. T. Anderson, "Multiple Instance Choquet integral for classifier fusion," 2016 IEEE Congress on Evolutionary Computation (CEC), Vancouver, BC, 2016, pp. 1054-1061. doi: 10.1109/CEC.2016.7743905
+
+**BibTex:**
 ```
 @ARTICLE{du2018multiple,
 author={X. Du and A. Zare},
 journal={IEEE Transactions on Geoscience and Remote Sensing},
 title={Multiple Instance Choquet Integral Classifier Fusion and Regression for Remote Sensing Applications},
 year={2018},
-volume={},
-number={},
-pages={1-13},
+volume={57},
+number={5},
+pages={2741-2753}, 
+month={May},
 doi={10.1109/TGRS.2018.2876687}
 }
 ```
