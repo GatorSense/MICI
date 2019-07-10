@@ -12,7 +12,7 @@ function [Parameters] = learnCIMeasureParams()
 %                    7. analysis: if ="1", record all intermediate results
 %                    8. p: the power coefficient for the generalized-mean function. Empirically, setting p(1) to a large postive number (e.g., 10) and p(2) to a large negative number (e.g., -10) works well.
                
-Parameters.nPop = 100; %Size of population
+Parameters.nPop = 100; %Size of population, preferably even numbers
 Parameters.sigma = 0.1; %Sigma of Gaussians in fitness function
 Parameters.maxIterations = 5000; %max number of iteration
 Parameters.fitnessThresh = 0.0001;%stopping criteria: when fitness change is less than the threshold
